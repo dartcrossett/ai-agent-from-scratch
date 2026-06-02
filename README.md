@@ -6,8 +6,9 @@
     git clone https://github.com/dartcrossett/ai-agent-from-scratch.git
     ```
 3. Navigate into `ai-agent-from-scratch`
-4. Update `DARTMOUTH_CHAT_API_KEY` in the `.env` file with your Dartmouth Chat API key.
-5. Run the agent
+4. Copy `.env-example` to `.env`
+5. Update `DARTMOUTH_CHAT_API_KEY` in `.env` with your Dartmouth Chat API key
+6. Run the agent
     ```shell
     uv run -p 3.13 -w httpx,python-dotenv agent.py
     ```
