@@ -47,59 +47,6 @@ def get_weather(latitude: float, longitude: float) -> dict:
     }
 
 
-tools = {
-    "get_lat_long": {
-        "function": get_lat_long,
-        "definition": {
-            "type": "function",
-            "function": {
-                "name": "get_lat_long",
-                "description": "Return latitude and longitude for a US zip code.",
-                "parameters": {
-                    "properties": {
-                        "zip_code": {
-                            "description": "The zip code for a US city",
-                            "title": "Zip Code",
-                            "type": "string",
-                        }
-                    },
-                    "required": ["zip_code"],
-                    "title": "LatLongInput",
-                    "type": "object",
-                },
-            },
-        },
-    },
-    "get_weather": {
-        "function": get_weather,
-        "definition": {
-            "type": "function",
-            "function": {
-                "name": "get_weather",
-                "description": "Return current weather data for a given latitude and longitude.",
-                "parameters": {
-                    "properties": {
-                        "latitude": {
-                            "description": "The latitude for a location",
-                            "title": "Latitude",
-                            "type": "string",
-                        },
-                        "longitude": {
-                            "description": "The longitude for a location",
-                            "title": "Longitude",
-                            "type": "string",
-                        },
-                    },
-                    "required": ["latitude", "longitude"],
-                    "title": "WeatherInput",
-                    "type": "object",
-                },
-            },
-        },
-    },
-}
-
-
 def run_agent(user_message: str, tools: dict) -> str:
     tool_definitions = [tool["definition"] for tool in tools.values()]
     messages = [
@@ -141,6 +88,61 @@ def run_agent(user_message: str, tools: dict) -> str:
             )
 
 
-if __name__ == "__main__":
+def main():
+    tools = {
+        "get_lat_long": {
+            "function": get_lat_long,
+            "definition": {
+                "type": "function",
+                "function": {
+                    "name": "get_lat_long",
+                    "description": "Return latitude and longitude for a US zip code.",
+                    "parameters": {
+                        "properties": {
+                            "zip_code": {
+                                "description": "The zip code for a US city",
+                                "title": "Zip Code",
+                                "type": "string",
+                            }
+                        },
+                        "required": ["zip_code"],
+                        "title": "LatLongInput",
+                        "type": "object",
+                    },
+                },
+            },
+        },
+        "get_weather": {
+            "function": get_weather,
+            "definition": {
+                "type": "function",
+                "function": {
+                    "name": "get_weather",
+                    "description": "Return current weather data for a given latitude and longitude.",
+                    "parameters": {
+                        "properties": {
+                            "latitude": {
+                                "description": "The latitude for a location",
+                                "title": "Latitude",
+                                "type": "string",
+                            },
+                            "longitude": {
+                                "description": "The longitude for a location",
+                                "title": "Longitude",
+                                "type": "string",
+                            },
+                        },
+                        "required": ["latitude", "longitude"],
+                        "title": "WeatherInput",
+                        "type": "object",
+                    },
+                },
+            },
+        },
+    }
     reply = run_agent("What is the weather for 03755?", tools)
     print(reply)
+
+
+if __name__ == "__main__":
+    main()
